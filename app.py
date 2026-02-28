@@ -92,7 +92,7 @@ button:hover {
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template_string(chat_template, messages=session.get("chat_history", [])
+    return render_template_string(chat_template, messages=session.get("chat_history", []))
 
 @app.route("/chat", methods=["POST"])
 def chat(): 
