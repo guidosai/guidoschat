@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, session
 from openai import OpenAI
 import os
 
@@ -7,7 +7,6 @@ app.secret_key = "guidos_chat_secret"
 
 client = OpenAI()
 
-chat_history = []
 
 chat_template = """
 <!doctype html>
@@ -93,10 +92,14 @@ button:hover {
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template_string(chat_template, messages=chat_history)
+    return render_template_string(chat_template, messages=session.get("chat_history", [])
 
 @app.route("/chat", methods=["POST"])
-def chat():
+def chat(): 
+
+    if "chat_history" not in session:
+    session["chat_history"] = []
+
     user_message = request.form.get("message")
 
     response = client.responses.create(
@@ -106,10 +109,10 @@ def chat():
 
     bot_reply = response.output_text
 
-    chat_history.append(("user", user_message))
-    chat_history.append(("bot", bot_reply))
+    session["chat_history"].append(("user", user_message))
+    session["chat_history"].append(("bot", bot_reply))
 
-    return render_template_string(chat_template, messages=chat_history)
+    return render_template_string(chat_template, messages=session["chat_history"])
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
