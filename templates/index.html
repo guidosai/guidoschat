@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GuidosChat</title>
+</head>
+<body>
+  <h1>GuidosChat funciona ✅</h1>
+
+  <input id="msg" placeholder="Escribe algo">
+  <button onclick="send()">Enviar</button>
+
+  <div id="out"></div>
+
+  <script>
+    async function send() {
+      const text = document.getElementById("msg").value;
+
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: text})
+      });
+
+      const data = await res.json();
+      document.getElementById("out").innerText = data.reply;
+    }
+  </script>
+</body>
+</html>

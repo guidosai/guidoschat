@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GuidosChat</title>
+</head>
+<body>
+
+<h2>GuidosChat 🤖</h2>
+
+<div id="chat"></div>
+
+<input type="text" id="mensaje" placeholder="Escribe tu mensaje">
+<button onclick="enviarMensaje()">Enviar</button>
+
+<script>
+async function enviarMensaje() {
+  const input = document.getElementById("mensaje");
+  const chat = document.getElementById("chat");
+  const texto = input.value;
+
+  chat.innerHTML += "<p><b>Tú:</b> " + texto + "</p>";
+  input.value = "";
+
+  const response = await fetch("http://192.168.1.98:5000/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mensaje: texto })
+  });
+
+  const data = await response.json();
+  chat.innerHTML += "<p><b>GuidosChat:</b> " + JSON.stringify(data) + "</p>";
+}
+</script>
+
+</body>
+</html>
