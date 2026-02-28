@@ -116,7 +116,7 @@ habla con seguridad y mentalidad de crecimiento.
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message}
         ]
-    (
+    )
 
 
     bot_reply = response.output_text
