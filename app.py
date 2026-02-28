@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string, session
+çfrom flask import Flask, request, render_template_string, session
 from openai import OpenAI
 import os
 
@@ -102,13 +102,13 @@ def chat():
 
     user_message = request.form.get("message")
 
-system_prompt = """
-Actua como una estrategia de negocios y crecimiento personal enfocado en latinoamerica.
-Tu objetivo es ayudar al usauario a generar mas ingresos, mejorar su disciplina y pensar como empresario.
-Responde de forma clara, directa y estructurada. Incluye pasos accionables.
-Evita respuestas genericas.
-habla con seguridad y mentalidad de crecimiento.
-"""
+    system_prompt = """
+    Actua como una estrategia de negocios y crecimiento personal enfocado en latinoamerica.
+    Tu objetivo es ayudar al usauario a generar mas ingresos, mejorar su disciplina y pensar como empresario.
+    Responde de forma clara, directa y estructurada. Incluye pasos accionables.
+    Evita respuestas genericas.
+    habla con seguridad y mentalidad de crecimiento.
+    """
 
     response = client.responses.create(
         model="gpt-4.1-mini",
