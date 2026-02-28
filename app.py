@@ -102,10 +102,22 @@ def chat():
 
     user_message = request.form.get("message")
 
+system_prompt = """
+Actua como una estrategia de negocios y crecimiento personal enfocado en latinoamerica.
+Tu objetivo es ayudar al usauario a generar mas ingresos, mejorar su disciplina y pensar como empresario.
+Responde de forma clara, directa y estructurada. Incluye pasos accionables.
+Evita respuestas genericas.
+habla con seguridad y mentalidad de crecimiento.
+"""
+
     response = client.responses.create(
         model="gpt-4.1-mini",
-        input=user_message
-    )
+        input=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_message}
+        ]
+    (
+
 
     bot_reply = response.output_text
 
