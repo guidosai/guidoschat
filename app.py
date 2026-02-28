@@ -98,7 +98,7 @@ def index():
 def chat(): 
 
     if "chat_history" not in session:
-    session["chat_history"] = []
+        session["chat_history"] = []
 
     user_message = request.form.get("message")
 
