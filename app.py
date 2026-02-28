@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string, session
+from flask import Flask, request, render_template_string, session, redirect, url_for
 from openai import OpenAI
 import os
 
@@ -81,7 +81,7 @@ button:hover {
 <div class="{{ role }}">{{ msg }}</div>
 {% endfor %}
 
-<form method="post" action="/chat">
+<form method="POST" action="/chat">
 <input name="message" placeholder="Escribe tu mensaje" required>
 <button>Enviar</button>
 </form>
